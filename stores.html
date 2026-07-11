@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stores Directory · City Mall Srinagar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: #F5F0E8;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: #1C2526;
+    }
+    body.menu-open { overflow: hidden; }
+
+     .header { padding: 20px 32px; border-bottom: 1px solid rgba(28, 37, 38, 0.06); }
+    .header-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .menu-btn { display: flex; align-items: center; justify-content: center; }
+    .logo { display: flex; flex-direction: column; align-items: center; line-height: 1; }
+    .logo-text { font-size: 28px; font-weight: 400; letter-spacing: 6px; color: #1C2526; font-family: 'Cormorant Garamond', 'Playfair Display', 'Times New Roman', serif; }
+    .logo-location { font-size: 10px; font-weight: 500; letter-spacing: 3px; color: #C89A9A; margin-top: 2px; font-family: 'Inter', sans-serif; }
+    .header-icon { background: transparent; border: none; cursor: pointer; padding: 8px; display: flex; align-items: center; justify-content: center; transition: opacity 0.2s ease; text-decoration: none; }
+    .header-icon:hover { opacity: 0.7; }
+    .header-actions { display: flex; gap: 8px; }
+
+
+    .site-footer { width: 100%; background-color: #1C2526; color: #F5F0E8; padding: 70px 32px 32px; box-sizing: border-box; }
+    .footer-container { max-width: 1300px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1.1fr 0.9fr 0.9fr 1fr; gap: 40px 50px; margin-bottom: 50px; }
+    .footer-col { display: flex; flex-direction: column; }
+    .footer-brand { padding-left: 8px; }
+    .footer-logo { display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 18px; }
+    .footer-logo-text { font-size: 26px; font-weight: 400; letter-spacing: 5px; color: #F5F0E8; font-family: 'Cormorant Garamond', 'Playfair Display', 'Times New Roman', serif; }
+    .footer-logo-location { font-size: 9.5px; font-weight: 500; letter-spacing: 3px; color: #C89A9A; margin-top: 3px; }
+    .footer-tagline { font-size: 13.5px; line-height: 1.65; color: rgba(245, 240, 232, 0.75); font-family: 'Inter', sans-serif; }
+    .footer-col h4 { font-size: 13px; font-weight: 600; letter-spacing: 1.3px; text-transform: uppercase; color: #C89A9A; margin-bottom: 18px; }
+    .footer-col ul { list-style: none; padding: 0; margin: 0; }
+    .footer-col li { margin-bottom: 11px; }
+    .footer-col a { color: rgba(245, 240, 232, 0.85); text-decoration: none; font-size: 14.5px; transition: color 0.25s ease; }
+    .footer-col a:hover { color: #C89A9A; }
+    .footer-visit p { font-size: 13.5px; color: rgba(245, 240, 232, 0.8); margin-bottom: 10px; }
+    .footer-social { display: flex; gap: 18px; margin-top: 20px; }
+    .footer-social a { width: 36px; height: 36px; border-radius: 50%; background: rgba(245, 240, 232, 0.06); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+    .footer-social a:hover { background: #C89A9A; transform: translateY(-3px); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; border-top: 1px solid rgba(245, 240, 232, 0.1); flex-wrap: wrap; gap: 15px; }
+    .copyright { font-size: 12.5px; color: rgba(245, 240, 232, 0.55); margin: 0; }
+    .legal-links a { color: rgba(245, 240, 232, 0.55); text-decoration: none; font-size: 12.5px; }
+    .legal-links a:hover { color: #C89A9A; }
+    .divider { color: rgba(245, 240, 232, 0.25); }
+
+
+    .menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: #1C2526; z-index: 1000; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease; overflow-y: auto; }
+    .menu-overlay.active { opacity: 1; visibility: visible; }
+    .menu-overlay-container { max-width: 1300px; margin: 0 auto; padding: 32px; min-height: 100vh; display: flex; flex-direction: column; }
+    .menu-close { align-self: flex-end; background: transparent; border: none; cursor: pointer; padding: 12px; color: #F5F0E8; transition: opacity 0.2s ease; }
+    .menu-close:hover { opacity: 0.7; }
+    .menu-nav { flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; }
+    .menu-nav ul { list-style: none; padding: 0; margin: 0; }
+    .menu-nav li { margin-bottom: 24px; }
+    .menu-nav a { font-size: 48px; font-weight: 400; letter-spacing: 2px; color: #F5F0E8; text-decoration: none; font-family: 'Cormorant Garamond', 'Playfair Display', 'Times New Roman', serif; transition: color 0.3s ease; }
+    .menu-nav a:hover { color: #C89A9A; }
+    .menu-footer { text-align: center; padding-bottom: 20px; }
+    .menu-hours { font-size: 14px; color: rgba(245, 240, 232, 0.7); font-family: 'Inter', sans-serif; margin-bottom: 16px; }
+    .menu-social { display: flex; justify-content: center; gap: 32px; }
+    .menu-social a { font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: #C89A9A; text-decoration: none; font-family: 'Inter', sans-serif; transition: color 0.3s ease; }
+    .menu-social a:hover { color: #F5F0E8; }
+
+    .page-title-section { padding: 60px 32px 20px; text-align: center; }
+    .page-title { font-size: 52px; font-weight: 400; letter-spacing: 3px; color: #1C2526; font-family: 'Cormorant Garamond', 'Playfair Display', 'Times New Roman', serif; margin-bottom: 12px; }
+    .page-subtitle { font-size: 15px; font-weight: 400; color: #004D4D; letter-spacing: 1px; text-transform: uppercase; }
+
+    .directory-controls { max-width: 1300px; margin: 0 auto 40px; padding: 0 32px; }
+    .search-wrapper { display: flex; justify-content: center; margin-bottom: 32px; }
+    .search-box { width: 100%; max-width: 600px; padding: 16px 24px; border: 1px solid rgba(28, 37, 38, 0.15); border-radius: 40px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(4px); font-size: 16px; font-family: 'Inter', sans-serif; color: #1C2526; outline: none; transition: border-color 0.3s, box-shadow 0.3s; }
+    .search-box::placeholder { color: #6b7a7b; font-weight: 300; }
+    .search-box:focus { border-color: #C89A9A; box-shadow: 0 4px 12px rgba(200, 154, 154, 0.1); }
+
+    .category-filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 12px; }
+    .cat-btn { padding: 10px 20px; border: 1px solid rgba(28, 37, 38, 0.1); border-radius: 30px; background: transparent; color: #1C2526; font-size: 14px; font-weight: 500; font-family: 'Inter', sans-serif; cursor: pointer; transition: all 0.2s ease; text-transform: capitalize; }
+    .cat-btn:hover { border-color: #C89A9A; color: #C89A9A; }
+    .cat-btn.active { background: #004D4D; border-color: #004D4D; color: #F5F0E8; }
+
+    .stores-grid { max-width: 1300px; margin: 0 auto; padding: 0 32px 80px; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
+
+    .store-card {
+      background: #FFFFFF;
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 10px 20px -5px rgba(28, 37, 38, 0.04);
+      transition: transform 0.25s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(237, 228, 216, 0.5);
+      display: flex;
+      flex-direction: column;
+    }
+    .store-card:hover { transform: translateY(-5px); box-shadow: 0 20px 30px -8px rgba(28, 37, 38, 0.1); border-color: #EDE4D8; }
+
+    .store-name { font-size: 22px; font-weight: 500; font-family: 'Cormorant Garamond', serif; color: #1C2526; margin-bottom: 6px; line-height: 1.2; }
+    .store-rating { display: flex; align-items: center; gap: 6px; margin-bottom: 12px; }
+    .stars { display: flex; gap: 2px; color: #C89A9A; }
+    .rating-value { font-weight: 600; font-size: 14px; color: #1C2526; }
+    .review-count { font-size: 12px; color: #6b7a7b; }
+    .store-category { font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #C89A9A; margin-bottom: 8px; }
+    .store-description { font-size: 14px; line-height: 1.5; color: #3a4647; margin-bottom: 16px; flex-grow: 1; }
+    .store-meta { font-size: 13px; color: #5e6b6c; margin-bottom: 8px; }
+    .store-location { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
+    .store-phone { margin-top: 4px; }
+
+    .no-results { text-align: center; padding: 60px; font-size: 18px; color: #6b7a7b; grid-column: 1 / -1; }
+
+    @media (max-width: 768px) {
+      .header { padding: 16px 20px; }
+      .logo-text { font-size: 22px; letter-spacing: 4px; }
+      .logo-location { font-size: 8px; letter-spacing: 2px; }
+      .page-title { font-size: 40px; }
+      .directory-controls { padding: 0 24px; }
+      .stores-grid { padding: 0 24px 60px; }
+      .site-footer { padding: 48px 24px 24px; }
+      .footer-top { grid-template-columns: 1fr; gap: 36px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .menu-nav a { font-size: 36px; }
+    }
+    @media (max-width: 480px) {
+      .page-title { font-size: 34px; }
+      .cat-btn { padding: 8px 14px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-container">
+    <button class="header-icon menu-btn" aria-label="Menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M3 12H21" stroke="#1C2526" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M3 6H21" stroke="#1C2526" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M3 18H21" stroke="#1C2526" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="logo">
+      <span class="logo-text">CITY MALL</span>
+      <span class="logo-location">SRINAGAR</span>
+    </div>
+    <div class="header-actions">
+      <a href="tel:919797668080" class="header-icon" aria-label="Call">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M22 16.92V19.92C22.0011 20.1985 21.9441 20.4741 21.8325 20.7293C21.7209 20.9845 21.5572 21.2136 21.3521 21.4018C21.1471 21.5901 20.9053 21.7335 20.6422 21.8227C20.3791 21.9119 20.1006 21.945 19.8245 21.92C16.6187 21.5718 13.5327 20.454 10.8683 18.6573C8.39982 17.0326 6.3353 14.8559 4.85648 12.3135C3.19438 9.72203 2.11746 6.75757 1.71448 3.65798C1.67915 3.3834 1.70176 3.1045 1.78083 2.83971C1.8599 2.57491 1.99359 2.33038 2.17326 2.12203C2.35294 1.91369 2.57458 1.74616 2.82342 1.63066C3.07227 1.51515 3.34255 1.45432 3.61648 1.45215H6.61648C7.10161 1.44868 7.56642 1.6265 7.91498 1.94675C8.26353 2.267 8.4658 2.70317 8.47648 3.16515C8.49648 4.05515 8.60648 4.92515 8.79648 5.75515C8.87454 6.09015 8.8524 6.43991 8.73301 6.76201C8.61361 7.08411 8.40223 7.36391 8.12648 7.56515L6.96648 8.51515C8.32182 11.1124 10.4004 13.191 12.9975 14.5461L13.9465 13.3861C14.1477 13.1104 14.4275 12.899 14.7496 12.7796C15.0717 12.6602 15.4215 12.6381 15.7565 12.7161C16.5875 12.9061 17.4575 13.0161 18.3475 13.0361C18.8147 13.0471 19.2552 13.2533 19.5763 13.6082C19.8974 13.9631 20.0712 14.4355 20.0585 14.9201L22 16.92Z" fill="#1C2526"/>
+        </svg>
+      </a>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=City+Mall+Srinagar" target="_blank" class="header-icon" aria-label="Map">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M12 13.5C13.6569 13.5 15 12.1569 15 10.5C15 8.84315 13.6569 7.5 12 7.5C10.3431 7.5 9 8.84315 9 10.5C9 12.1569 10.3431 13.5 12 13.5Z" stroke="#1C2526" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 22C14 18 20 15.4183 20 10C20 5.58172 16.4183 2 12 2C7.58172 2 4 5.58172 4 10C4 15.4183 10 18 12 22Z" stroke="#1C2526" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<section class="page-title-section">
+  <h1 class="page-title">Store Directory</h1>
+  <p class="page-subtitle">Discover over 40 brands under one roof</p>
+</section>
+
+
+<div class="directory-controls">
+  <div class="search-wrapper">
+    <input type="text" id="storeSearch" class="search-box" placeholder="Search stores, categories or floors..." autocomplete="off">
+  </div>
+  <div class="category-filters" id="categoryFilters">
+    <button class="cat-btn active" data-category="all">All</button>
+    <button class="cat-btn" data-category="Food & Drink">Food & Drink</button>
+    <button class="cat-btn" data-category="Clothing">Clothing</button>
+    <button class="cat-btn" data-category="Shoes">Shoes</button>
+    <button class="cat-btn" data-category="Health & Beauty">Health & Beauty</button>
+    <button class="cat-btn" data-category="Jewellery">Jewellery</button>
+    <button class="cat-btn" data-category="Toys & Sports">Toys & Sports</button>
+    <button class="cat-btn" data-category="Other">Other</button>
+  </div>
+</div>
+
+<div class="stores-grid" id="storesGrid"></div>
+
+<footer class="site-footer">
+ <div class="footer-container">
+    <div class="footer-top">
+      
+      <div class="footer-col footer-brand">
+        <div class="footer-logo">
+          <span class="footer-logo-text">CITY MALL</span>
+          <span class="footer-logo-location">SRINAGAR</span>
+        </div>
+        <p class="footer-tagline">A modern shopping experience<br>rooted in the heart of Kashmir.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="/stores">Stores</a></li>
+          <li><a href="https://www.instagram.com/citymall_srinagar/">Instagram</a></li>
+          <li><a href="https://www.facebook.com/CityMallKashmir/">Facebook</a></li>
+          <li style="display: none;"><a href="#">Events</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Information</h4>
+        <ul>
+          <li style="display: none;"><a href="#">About Us</a></li>
+          <li><a href="tel:919797668080">Contact</a></li>
+          <li style="display: none;"><a href="#">Parking</a></li>
+          <li style="display: none;"><a href="#">FAQs</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-visit">
+        <h4>Visit</h4>
+        <p class="footer-hours">Mon – Sun: 10:00 AM – 10:00 PM</p>
+        <p class="footer-address">MA Road, Regal Chowk, Munshi Bagh,<br>Srinagar, J&K 190001</p>
+        <p class="footer-phone">+91 97976 68080</p>
+        
+        <div class="footer-social">
+          <a href="https://www.instagram.com/citymall_srinagar/" target="_blank" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <rect x="2" y="2" width="20" height="20" rx="5" stroke="#C89A9A" stroke-width="1.5"/>
+              <circle cx="12" cy="12" r="4.5" stroke="#C89A9A" stroke-width="1.5"/>
+              <circle cx="17.5" cy="6.5" r="1.5" fill="#C89A9A"/>
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/CityMallKashmir/" target="_blank" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M18 2H15C13.6739 2 12.4021 2.52678 11.4645 3.46447C10.5268 4.40215 10 5.67392 10 7V10H7V14H10V22H14V14H17L18 10H14V7C14 6.73478 14.1054 6.48043 14.2929 6.29289C14.4804 6.10536 14.7348 6 15 6H18V2Z" stroke="#C89A9A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="copyright">© 2026 City Mall Srinagar. All rights reserved.</p>
+      <div class="legal-links" style="display: none;">
+        <a href="#">Privacy Policy</a>
+        <span class="divider">|</span>
+        <a href="#">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="menu-overlay" id="menuOverlay">
+  <div class="menu-overlay-container">
+    <button class="menu-close" id="menuClose" aria-label="Close menu">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5F0E8" stroke-width="1.5">
+        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-linecap="round"/>
+      </svg>
+    </button>
+<nav class="menu-nav">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Stores</a></li>
+        <li style="display: none;"><a href="#">Dining</a></li>
+        <li style="display: none;"><a href="#">Entertainment</a></li>
+        <li style="display: none;"><a href="#">Events</a></li>
+        <li style="display: none;"><a href="#">About Us</a></li>
+        <li><a href="tel:919797668080">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="menu-footer">
+      <p class="menu-hours">Open Daily: 10:00 AM – 10:00 PM</p>
+      <div class="menu-social">
+        <a href="https://www.instagram.com/citymall_srinagar/" target="_blank">Instagram</a>
+        <a href="https://www.facebook.com/CityMallKashmir/" target="_blank">Facebook</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const menuBtn = document.querySelector('.menu-btn');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const menuClose = document.getElementById('menuClose');
+    const body = document.body;
+    if (menuBtn && menuOverlay && menuClose) {
+      menuBtn.addEventListener('click', () => { menuOverlay.classList.add('active'); body.classList.add('menu-open'); });
+      menuClose.addEventListener('click', () => { menuOverlay.classList.remove('active'); body.classList.remove('menu-open'); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menuOverlay.classList.contains('active')) { menuOverlay.classList.remove('active'); body.classList.remove('menu-open'); }});
+      menuOverlay.addEventListener('click', (e) => { if (e.target === menuOverlay) { menuOverlay.classList.remove('active'); body.classList.remove('menu-open'); }});
+    }
+
+    const storesData = [
+      { name:"KFC", category:"Food & Drink", rating:4.0, reviews:4044, price:"₹₹", desc:"Fried chicken restaurant chain", floor:"3rd Floor, Food Court", phone:"" },
+      { name:"Tanishq Jewellery", category:"Jewellery", rating:4.8, reviews:3223, desc:"Jewelry store", floor:"City Walk Mall, MA Road", phone:"0194 248 1881" },
+      { name:"Pizza Hut", category:"Food & Drink", rating:4.1, reviews:2644, price:"₹₹", desc:"Casual pizza chain with wide selection", floor:"3rd Flr, City Walk Shopping Mall", phone:"" },
+      { name:"Le Delice", category:"Food & Drink", rating:4.9, reviews:2642, price:"₹200–400", desc:"Bakery and Cake Shop", floor:"MA Road", phone:"" },
+      { name:"Lakme Salon", category:"Health & Beauty", rating:4.8, reviews:1624, desc:"Beauty Parlour", floor:"City walk, MA Road", phone:"" },
+      { name:"CaratLane Jewellery", category:"Jewellery", rating:5.0, reviews:1449, desc:"Jewelry store", floor:"Ground Floor, City Walk Mall", phone:"080 6920 1194" },
+      { name:"Manyavar", category:"Clothing", rating:4.8, reviews:254, desc:"Men's clothing store", floor:"Shop No 22A, 1st Floor", phone:"080 3700 2424" },
+      { name:"Black Bear Brew", category:"Food & Drink", rating:4.4, reviews:198, desc:"Cafe", floor:"MA Road", phone:"" },
+      { name:"Longevita", category:"Health & Beauty", rating:4.8, reviews:191, desc:"Dermatologist", floor:"2nd floor, City Mall", phone:"" },
+      { name:"Cantabil (1st Floor)", category:"Clothing", rating:4.9, reviews:179, desc:"Clothing Accessories Store", floor:"Shop No 8, 1st Floor", phone:"0194 350 0585" },
+      { name:"The Pavilion", category:"Toys & Sports", rating:4.9, reviews:177, desc:"Game store", floor:"City Mall, MA Road", phone:"" },
+      { name:"Frolic FunCity", category:"Toys & Sports", rating:4.0, reviews:164, desc:"Video arcade", floor:"City Mall, MA Road", phone:"" },
+      { name:"Helios Watch Store", category:"Other", rating:4.4, reviews:146, desc:"Watch store", floor:"First Floor, City Walk Mall", phone:"093555 36052" },
+      { name:"Moti Mahal", category:"Food & Drink", rating:4.2, reviews:111, price:"₹₹", desc:"Restaurant", floor:"3rd Floor, Food Court", phone:"" },
+      { name:"ColorPlus", category:"Clothing", rating:4.9, reviews:98, desc:"Clothing store", floor:"A-16 CITY WALK MALL GR Floor", phone:"080 6986 6017" },
+      { name:"Mad for Momos", category:"Food & Drink", rating:3.3, reviews:88, desc:"Momo restaurant", floor:"City Mall, MA Road", phone:"" },
+      { name:"Cantabil (Shop 23)", category:"Clothing", rating:5.0, reviews:76, desc:"Clothing store", floor:"Shop No 23, 1st Flr", phone:"074000 49069" },
+      { name:"Skechers", category:"Shoes", rating:4.0, reviews:62, desc:"House-brand athletic & casual shoes", floor:"Shop No. A-9, Ground Floor", phone:"0194 248 3350" },
+      { name:"Ethnix by Raymond", category:"Clothing", rating:4.9, reviews:58, desc:"Clothing store", floor:"1st Floor, City Mall, No. 18", phone:"080 6986 6595" },
+      { name:"PUMA Store", category:"Shoes", rating:4.0, reviews:54, desc:"Branded sports shoes, gear & apparel", floor:"Fashion Secrets, City Walk Mall", phone:"079 4272 5496" },
+      { name:"Parimahal", category:"Food & Drink", rating:4.3, reviews:42, price:"₹200–400", desc:"Fast Food", floor:"MA Road", phone:"" },
+      { name:"Paristaan The Bridal Lounge", category:"Clothing", rating:4.1, reviews:38, desc:"Bridal shop", floor:"City Walk, Residency Road", phone:"099065 42922" },
+      { name:"BECCOS", category:"Other", rating:4.2, reviews:30, desc:"Outlet mall", floor:"City Walk Mall, Shop No - 40A, Second Floor", phone:"070064 00764" },
+      { name:"Miniso", category:"Other", rating:3.9, reviews:29, desc:"Outlet mall", floor:"City walk mall, MA Road", phone:"" },
+      { name:"The Body Shop", category:"Health & Beauty", rating:4.9, reviews:27, desc:"Cosmetics store", floor:"Shop No A15, Ground Floor", phone:"0194 455 5153" },
+      { name:"Levi's Exclusive Store", category:"Clothing", rating:2.0, reviews:24, desc:"Stalwart for iconic jeans & casualwear", floor:"Shop No A10 & A11, Ground Flr", phone:"097971 04856" },
+      { name:"Opium Store", category:"Other", rating:4.8, reviews:22, desc:"Sunglasses store", floor:"2nd floor, City Mall", phone:"" },
+      { name:"Momo & Kunafah", category:"Food & Drink", rating:3.3, reviews:21, price:"₹400–600", desc:"Indian", floor:"Citymall, Lal Chowk", phone:"" },
+      { name:"Crocs", category:"Shoes", rating:4.5, reviews:20, desc:"Shoe store", floor:"GF-17, City Walk Mall", phone:"085913 08252" },
+      { name:"Mi Arcus", category:"Other", rating:4.8, reviews:19, desc:"Baby store", floor:"First Floor, City Walk Mall", phone:"1800 120 321 111" },
+      { name:"Tommy Hilfiger", category:"Clothing", rating:2.9, reviews:18, desc:"Jeans shop", floor:"Ist floor, City walk Mall", phone:"" },
+      { name:"W for Woman", category:"Clothing", rating:4.9, reviews:17, desc:"Women's clothing store", floor:"Shop 1, Ground Floor", phone:"082912 99757" },
+      { name:"JACK&JONES / SELECTED", category:"Clothing", rating:4.5, reviews:16, desc:"Clothing store", floor:"Ground Floor, City Walk Mall", phone:"0194 350 0285" },
+      { name:"U.S. Polo Assn.", category:"Clothing", rating:3.3, reviews:15, desc:"Clothing store", floor:"Ist Floor Shop no.20", phone:"" },
+      { name:"Cafe Shot", category:"Food & Drink", rating:4.8, reviews:13, desc:"Cafe", floor:"City Mall, MA Road", phone:"" },
+      { name:"ZARKAN", category:"Clothing", rating:4.5, reviews:10, desc:"Bridal shop", floor:"Ist Floor, City walk mall", phone:"" },
+      { name:"Van Heusen", category:"Clothing", rating:4.8, reviews:8, desc:"Men Clothing Store", floor:"1st FLOOR CITY WALK MALL", phone:"0194 247 7709" },
+      { name:"Shehla'sDesignerCollection", category:"Clothing", rating:4.5, reviews:8, desc:"Fashion designer", floor:"2nd floor, City Mall", phone:"" },
+      { name:"Louis Philippe", category:"Clothing", rating:4.2, reviews:5, desc:"Clothing store", floor:"", phone:"095961 53291" },
+      { name:"Relax and fun", category:"Health & Beauty", rating:3.0, reviews:2, desc:"Massage spa", floor:"2, Residency Road", phone:"" },
+      // New store
+      { name:"ICRUS OOSHIN", category:"Clothing", rating:4.5, reviews:2, desc:"Clothing store", floor:"Ist floor", phone:"" }
+    ];
+
+    const grid = document.getElementById('storesGrid');
+    const searchInput = document.getElementById('storeSearch');
+    const catButtons = document.querySelectorAll('.cat-btn');
+    let activeCategory = 'all';
+
+    function renderStores(filterText = '') {
+      const filtered = storesData.filter(store => {
+        const matchesCat = activeCategory === 'all' || store.category === activeCategory;
+        const searchLower = filterText.toLowerCase();
+        const matchesSearch = !filterText || 
+          store.name.toLowerCase().includes(searchLower) ||
+          (store.desc && store.desc.toLowerCase().includes(searchLower)) ||
+          (store.floor && store.floor.toLowerCase().includes(searchLower)) ||
+          (store.category && store.category.toLowerCase().includes(searchLower));
+        return matchesCat && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="no-results">No stores found. Try a different search or category.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(store => {
+        const fullStars = Math.floor(store.rating);
+        const hasHalf = store.rating % 1 >= 0.5;
+        let starsHtml = '';
+        for (let i = 0; i < fullStars; i++) starsHtml += '★';
+        if (hasHalf) starsHtml += '½';
+        
+        return `
+          <div class="store-card">
+            <div class="store-name">${store.name}</div>
+            <div class="store-rating">
+              <span class="stars">${starsHtml}</span>
+              <span class="rating-value">${store.rating.toFixed(1)}</span>
+              <span class="review-count">(${store.reviews})</span>
+            </div>
+            <div class="store-category">${store.category}</div>
+            <div class="store-description">${store.desc || ''}</div>
+            <div class="store-meta">
+              ${store.floor ? `<div class="store-location">📍 ${store.floor}</div>` : ''}
+              ${store.phone ? `<div class="store-phone">📞 ${store.phone}</div>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    catButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        catButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeCategory = btn.dataset.category;
+        renderStores(searchInput.value);
+      });
+    });
+
+    searchInput.addEventListener('input', (e) => renderStores(e.target.value));
+
+    renderStores();
+  })();
+</script>
+</body>
+</html>
